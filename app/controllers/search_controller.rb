@@ -5,6 +5,7 @@ class SearchController < ApplicationController
   def new
     search = search_client.get(params['searchId'])
     place_ids = search.body["places"]
+    twilio = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_AUTH_TOKEN']
     place_ids.each do |place_id, _|
       place = place_client.get(place_id).body
       data = {
@@ -16,8 +17,7 @@ class SearchController < ApplicationController
         status_callback: "#{ENV['BASE_URL']}/status_callback?place_id=#{place_id}&search_id=#{params['searchId']}",
         url: "#{ENV['BASE_URL']}/init_call?place_id=#{place_id}&search_id=#{params['searchId']}"
       }
-      twilio = Twilio::REST::Client.new ENV['TWILIO_SID'], ENV['TWILIO_AUTH_TOKEN']
-      twilio.account.calls.create data
+      puts twilio.account.calls.create data
     end
 
     render json: {success: true}
