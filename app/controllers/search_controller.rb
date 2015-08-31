@@ -8,8 +8,8 @@ class SearchController < ApplicationController
     place_ids.each do |place_id, _|
       place = place_client.get(place_id).body
       data = {
-        # to: place['phone'],
-        to: "17078496085",
+        to: place['phone'],
+        # to: "17078496085",
         from: "14157636769",
         record: true,
         if_machine: "Hangup",
