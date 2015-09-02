@@ -4,8 +4,8 @@ class PlaceCallWorker
   def perform(search_id, place_id)
     place = place_client.get(place_id).body
     data = {
-      # to: place['phone'],
-      to: "17078496085",
+      to: place['phone'],
+      # to: "17078496085",
       from: "14157636769",
       if_machine: "Hangup",
       status_callback: "#{ENV['BASE_URL']}/status_callback?place_id=#{place_id}&search_id=#{search_id}",
