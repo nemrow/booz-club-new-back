@@ -31,6 +31,9 @@ gem 'rails_12factor', group: :production
 
 gem 'newrelic_rpm'
 
+gem 'sinatra', :require => nil
+gem 'sidekiq'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
